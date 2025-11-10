@@ -163,12 +163,12 @@ namespace csc212_proj2
        if (head_ptr == NULL) {
         assert (head_ptr != NULL);
         return;
-}
-else if (head_ptr->link() == NULL) {
+    }
+    else if (head_ptr->link() == NULL) {
     delete head_ptr;
     head_ptr = NULL;
-}
-else {
+    }
+    else {
     node<Item>* prev = head_ptr;
     node<Item>* cur  = head_ptr->link();
     while (cur->link() != NULL) {
@@ -177,13 +177,25 @@ else {
     }
     prev->set_link(NULL);
     delete cur;
-}
+    }
     }
 
     template <class Item>
     node<Item>* list_copy_front(const node<Item>* source_ptr, std::size_t n)
     {
-        return NULL;
+        if(n == 0 ) return NULL;
+        else{
+            const node<Item> * src = source_ptr;
+            node<Item>* new_head = new node<Item>(src->data(),NULL);
+            node<Item>* tail = new_head;
+            for(std::size_t i = 1; i < n; ++i){
+                src = src->link();
+                tail->set_link(new node<Item>(src->data(),NULL));
+                tail = tail->link();
+            }
+            return new_head;
+        }
+
     }
 
 
